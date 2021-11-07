@@ -11,7 +11,7 @@
                     <div class="main-inner">
                         <div class="content">
                             {{ if .IsHome }}
-                            <div class="page-title home-page-title" style="text-align: center; font-size: 30px;">{{ .Site.Params.poem }}</div>
+                            <div class="page-title home-page-title" style="text-align: center; font-size: 30px; line-height: 2em;">{{ .Site.Params.poem }}</div>
                             {{ else if .IsPage }}
                             {{ else }}
                             <div class="page-title"><i data-feather="folder"></i><span>{{ .Title }}</span></div>
