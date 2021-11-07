@@ -1,0 +1,34 @@
+<header id="header">
+    <h1 class="site-title">
+        <a href="{{ .Site.BaseURL | relURL }}">{{ .Site.Title }}</a>
+    </h1>
+    <div id="move-sidebar-header">
+        <div class="sidebar s1">
+            <div class="sidebar-content">
+                <div id="profile" class="group">
+                    <div id="profile-inner">
+                        <div id="profile-img">
+                            <img src="{{ .Site.Params.avatar }}" alt="">
+                        </div>
+                        <div id="profile-name">{{ .Site.Params.name }}</div>
+                        <div id="profile-description">"{{ .Site.Params.description }}"</div>
+                    </div>
+                </div>
+                <div id="tabs" class="widget">
+                    <ul class="tabs-nav group">
+                        {{ range .Site.Menus.main }}
+                        <li class="tab">
+                          <a href="{{ .URL }}">
+                                {{ if .Pre }}
+                                {{ $icon := printf "<i data-feather=\"%s\"></i> " .Pre | safeHTML }}
+                                {{ $icon }}
+                                {{ end }}
+                            </a>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

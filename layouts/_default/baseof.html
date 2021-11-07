@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+    {{- partial "head.html" . -}}
+    <body id="body">
+    <div id="wrapper">
+            <div id="wrapper-inner">
+                {{- partial "header.html" . -}}
+                {{- partial "sidebar.html" . -}}
+                <div class="main" id="page">
+                    {{- partial "nav.html" . -}}
+                    <div class="main-inner">
+                        <div class="content">
+                            {{ if .IsHome }}
+                            <div class="page-title home-page-title" style="text-align: center; font-size: 30px;">{{ .Site.Params.poem }}</div>
+                            {{ else if .IsPage }}
+                            {{ else }}
+                            <div class="page-title"><i data-feather="folder"></i><span>{{ .Title }}</span></div>
+                            {{ end }}
+                            <div class="content-inner">
+                                {{- block "main" . }} {{- end }}
+                            </div>
+
+                        </div>
+                    </div>
+                    {{- partial "footer.html" . -}}
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>feather.replace()</script>
+</html>

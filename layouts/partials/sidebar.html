@@ -1,0 +1,19 @@
+<div class="sidebar s2">
+    <div class="search">
+        <div class="toggle-box">
+            <input id="theme-switch" name="theme-toggle" type="checkbox" class="theme-toggle">
+            <label for="theme-switch" class="theme-dark"></label>
+            <label for="theme-switch" class="theme-light"></label>
+        </div>
+    </div>
+    <ul class="social-link">
+        {{ range .Site.Menus.social }}
+            <a href="{{ .URL }}">
+                <li class="social-link-item">
+                    {{ $icon := printf "<i data-feather=\"%s\"></i> " .Pre | safeHTML }}
+                    {{ $icon }}
+                </li>
+            </a>
+       {{ end }}
+    </ul>
+</div>

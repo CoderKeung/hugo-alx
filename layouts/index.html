@@ -1,0 +1,27 @@
+{{ define "main" }}
+<article class="article">
+    <div class="article-left">
+        <div class="article-avatar">
+          <img src="/img/avatar.png" height="48" width="48" loading="lazy"></img>
+        </div>
+    </div>
+    <div class="article-right">
+        <div class="article-right-inner">
+            <h2 class="article-right-inner-title" style="text-align: center; font-size: 20px; line-height: 2em;">
+              在这茫茫的海里<br>我是游弋在粼粼波光间的星星<br>是真实，也是幻境<br>我甚至分不清我是哪一点亮色
+            </h2>
+            <div class="article-right-inner-excerpt">
+                {{ if .Params.abstract }}
+                    {{ .Params.abstract}}
+                {{ else }}
+                    {{ .Summary }}
+                {{ end }}
+            </div>
+            <a href="{{ .RelPermalink }}" class="readMore">
+              {{ now.Format "2006年01月02日" }}
+            </a>
+        </div>
+    </div>
+</article>
+
+{{ end }}
