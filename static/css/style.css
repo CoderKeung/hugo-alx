@@ -565,3 +565,15 @@ a {
 }
 }
 
+@media screen and (max-width: 600px) {
+.article-left {
+  display: none;
+}
+.article-right {
+  margin-left: 0px;
+}
+.article {
+  padding-left: 17px;
+  padding-right: 17px;
+}
+}
