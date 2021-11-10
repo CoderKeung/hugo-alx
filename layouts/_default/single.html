@@ -7,13 +7,13 @@
 {{- if or .Site.Params.indent .Params.indent -}}{{ printf " article-indent" }}{{- end -}}
 ">
             {{ if .Params.initial }}
-            {{ $firstParagraph := index (findRE "<p.*?>(.|\n)*?</p>" .Content 1) 0 }}
+            {{ $content := partial "img" . }}
+            {{ $firstParagraph := index (findRE "<p.*?>(.|\n)*?</p>" $content 1) 0 }}
             {{ $firstWord := substr $firstParagraph 3 1 }}
             {{ $firstTagP := substr $firstParagraph 0 4 }}
             {{ $newFirstWord := printf "<p style=\"text-indent: 0\"><span class=\"first-word\">%s</span>" $firstWord }}
-            {{ $content := replace .Content $firstTagP $newFirstWord 1}}
-            {{ $content := partial "img" . }}
-            {{ $content }}
+            {{ $content := replace $content $firstTagP $newFirstWord 1}}
+            {{ $content | safeHTML }}
             {{ else }}
             {{ .Content }}
             {{ end }}
