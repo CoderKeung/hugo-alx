@@ -1,0 +1,11 @@
+<nav class="pagination">
+    <div class="wp-pagenavi" role="navigation">
+        {{ range .Paginator.Pagers }}
+            {{ if eq . $.Paginator }}
+                <span class="pages">{{- .PageNumber -}}</span>
+            {{ else if or (or (eq . $.Paginator.First) (eq . $.Paginator.Prev)) (or  (eq . $.Paginator.Next) (eq . $.Paginator.Last )) }}
+                <a class="pages-link" href="{{ .URL }}">{{ .PageNumber }}</a>
+            {{ end }}
+        {{ end }}
+    </div>
+</nav>

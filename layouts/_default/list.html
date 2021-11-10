@@ -1,10 +1,9 @@
 {{ define "main"}}
-{{ range .Pages }}
-
+{{ range (.Paginate .RegularPagesRecursive).Pages }}
 <article class="article">
     <div class="article-left">
         <div class="article-avatar">
-            <img src="/img/avatar.png" height="48" width="48" loading="lazy">
+            <img src="{{ .Site.Params.avatar }}" height="48" width="48" loading="lazy">
         </div>
     </div>
     <div class="article-right">
@@ -16,10 +15,17 @@
                 <a href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h2>
             <div class="article-right-inner-excerpt">
+                {{ $summaryCount := .Summary | strings.RuneCount }}
                 {{ if .Params.abstract }}
-                    {{ .Params.abstract}}
+                    {{ .Params.abstract }}
                 {{ else }}
-                    {{ .Summary }}
+                    {{ if gt $summaryCount 60 }}
+                        {{ $summary := substr .Summary 0 60 }}
+                        {{ $summary := printf "%s......" $summary }}
+                        {{ $summary | safeHTML }}
+                    {{ else }}
+                        {{ .Summary }}
+                    {{ end }}
                 {{ end }}
             </div>
 
@@ -31,7 +37,7 @@
             {{ range . }}
                 {{ $href := print (absURL "tags/") ( urlize . ) }}
                 <a href="{{ $href }}">
-                    <i data-feather="tag"></i>
+                    {{ index $.Site.Data.SVG "tag" | safeHTML }}
                     {{ . }}
                 </a>
             {{ end }}
@@ -40,4 +46,5 @@
     </div>
 </article>
 {{ end }}
+{{ partial "pagination" . }}
 {{ end }}

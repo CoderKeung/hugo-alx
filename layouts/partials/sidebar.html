@@ -8,12 +8,12 @@
     </div>
     <ul class="social-link">
         {{ range .Site.Menus.social }}
-            <a href="{{ .URL }}">
+            <a href="{{ .URL }}" title="{{ .Name }}">
                 <li class="social-link-item">
-                    {{ $icon := printf "<i data-feather=\"%s\"></i> " .Pre | safeHTML }}
-                    {{ $icon }}
+                    {{ $icon := printf "%s" .Pre }}
+                    {{ index $.Site.Data.SVG $icon | safeHTML }}
                 </li>
             </a>
-       {{ end }}
+        {{ end }}
     </ul>
 </div>

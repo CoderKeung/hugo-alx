@@ -37,6 +37,12 @@ name = "CoderKeung"
 description = "努力学习，不准赖床!"
 avatar = "/img/avatar.png"
 poem = "游荡人间二十载，身无寸技"
+indent = false
+showRecentArticle = true
+showTags = true
+showAllArticle = true
+enableCaption = true
+captionPrefix = "◎"
 
 [taxonomies]
     tag = "tags"

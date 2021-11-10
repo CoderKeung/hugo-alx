@@ -1,0 +1,46 @@
+<div id="tabs" class="widget">
+    <ul class="tabs-nav group" id="tabsNav">
+        {{ if .Site.Params.showRecentArticle }}
+        <li class="tab tabClick" id="recentArticle-button">
+            {{ index .Site.Data.SVG "time" | safeHTML }}
+        </li>
+        {{ end }}
+        <li class="tab" id="allArticle-button">
+            {{ index .Site.Data.SVG "home" | safeHTML }}
+        </li>
+        <li class="tab" id="tags-button">
+            {{ index .Site.Data.SVG "tag" | safeHTML }}
+        </li>
+    </ul>
+    <div class="tags" id="tags">
+        {{ range $tagName, $tag := .Site.Taxonomies }}
+        {{ range $key, $value := $tag }}
+        <a href="{{ "/" | relLangURL }}{{ $tagName | urlize }}{{ "/" }}{{ $key | urlize }}" class="tag">{{ $key }}</a>
+        {{ end }}
+        {{ end }}
+    </div>
+    <div class="recentArticle" id="recentArticle">
+        <!-- Groups content by month according to the "lastMod" field in front matter -->
+        {{ $index := 0 }}
+        {{ range $.Site.RegularPages.GroupByLastmod "2006-01" }}
+        {{ if lt $index 5 }}
+        <ul>
+            {{ range .Pages }}
+            <a href="{{ .Permalink }}">
+                <li class="recentArticle-item">
+                    <span>{{ .Title }}</span>
+                    <div class="meta">{{ .Lastmod.Format "2006年02月01日" }}</div>
+                </li>
+            </a>
+            {{ $index = add $index 1 }}
+            {{ end }}
+        </ul>
+        {{ end }}
+        {{ end }}
+    </div>
+    <div class="allArticle" id="allArticle">
+        <h1 class="poem">
+            {{ $.Site.Params.poem }}
+        </h1>
+    </div>
+</div>

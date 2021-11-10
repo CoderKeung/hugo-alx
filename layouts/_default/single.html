@@ -3,8 +3,20 @@
     <div class="post">
         <header class="post-header">{{ .Title }}</header>
         <div class="entry-content">
-            <div class="entry">
-                {{ .Content }}
+            <div class="entry
+{{- if or .Site.Params.indent .Params.indent -}}{{ printf " article-indent" }}{{- end -}}
+">
+            {{ if .Params.initial }}
+            {{ $firstParagraph := index (findRE "<p.*?>(.|\n)*?</p>" .Content 1) 0 }}
+            {{ $firstWord := substr $firstParagraph 3 1 }}
+            {{ $firstTagP := substr $firstParagraph 0 4 }}
+            {{ $newFirstWord := printf "<p style=\"text-indent: 0\"><span class=\"first-word\">%s</span>" $firstWord }}
+            {{ $content := replace .Content $firstTagP $newFirstWord 1}}
+            {{ $content := partial "img" . }}
+            {{ $content }}
+            {{ else }}
+            {{ .Content }}
+            {{ end }}
             </div>
         </div>
     </div>

@@ -14,20 +14,8 @@
                         <div id="profile-description">"{{ .Site.Params.description }}"</div>
                     </div>
                 </div>
-                <div id="tabs" class="widget">
-                    <ul class="tabs-nav group">
-                        {{ range .Site.Menus.main }}
-                        <li class="tab">
-                          <a href="{{ .URL }}">
-                                {{ if .Pre }}
-                                {{ $icon := printf "<i data-feather=\"%s\"></i> " .Pre | safeHTML }}
-                                {{ $icon }}
-                                {{ end }}
-                            </a>
-                        </li>
-                        {{ end }}
-                    </ul>
-                </div>
+                {{- partial "postNav.html" . -}}
+                {{- partial "tabs.html" . -}}
             </div>
         </div>
     </div>
