@@ -28,7 +28,13 @@
             {{ range .Pages }}
             <a href="{{ .Permalink }}">
                 <li class="recentArticle-item">
-                    <span>{{ .Title }}</span>
+                    {{ $title := .Title }}
+                    {{ $titleWordCount := .Title | strings.RuneCount }}
+                    {{ if gt $titleWordCount 10 }}
+                    {{ $title = substr $title 0 10 }}
+                    {{ $title = printf "%s..." $title }}
+                    {{ end }}
+                    <span>{{ $title }}</span>
                     <div class="meta">{{ .Lastmod.Format "2006年02月01日" }}</div>
                 </li>
             </a>
